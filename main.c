@@ -9,7 +9,8 @@ int main() {
 
     int NoOfFoodTypes;
     printf("Please input number of food types:\n");
-    scanf("%d", &NoOfFoodTypes); getchar();
+    scanf("%d", &NoOfFoodTypes);
+    getchar();
 
     printf("Please input food types (each on a new line, may contain spaces):\n");
     char ** FoodTypes;
@@ -26,7 +27,8 @@ int main() {
     for(int i=0; i<NoOfFoodTypes; i++)
     {
         printf("Please input no of speciffic foods for food \"%s\":\n",FoodTypes[i]);
-        scanf("%d", &NoOfSpecificFood[i]); getchar();
+        scanf("%d", &NoOfSpecificFood[i]);
+        getchar();
 
         SpecificFood[i] = (char **)malloc(NoOfSpecificFood[i] * sizeof(char *));
         PriceFood[i] = (double *)malloc(NoOfSpecificFood[i] * sizeof(double));
@@ -43,7 +45,8 @@ int main() {
 
     int NoOfDrinks;
     printf("Please input no of drinks:\n");
-    scanf("%d", &NoOfDrinks); getchar();
+    scanf("%d", &NoOfDrinks);
+    getchar();
 
     char **Drinks;
     double *PriceDrinks;
@@ -57,7 +60,7 @@ int main() {
         gets(line);
         sscanf(line, "%s (%lf)", Drinks[i], &PriceDrinks[i]);
     }
-    
+
     printf("The food data is:\n");
     for(int i=0; i<NoOfFoodTypes; i++)
     {
