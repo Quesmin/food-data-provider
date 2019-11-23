@@ -67,6 +67,28 @@ int main() {
         sscanf(line, "%lf)", &PriceDrinks[i]);
     }
 
+    FILE *f;
+    f = fopen("C:\\Users\\Cosmin\\Desktop\\CP\\food-ordering\\data.txt", "w");
+    fprintf(f,"%d:\n", NoOfFoodTypes);
+    for(int i=0; i<NoOfFoodTypes; i++)
+    {
+        fprintf(f,"%s: ", FoodTypes[i]);
+        for(int j=0; j<NoOfSpecificFood[i]; j++) {
+            fprintf(f, "(%s - %.2lf)", SpecificFood[i][j], PriceFood[i][j]);
+            if (j == NoOfSpecificFood[i] - 1)
+                fprintf(f, "\n");
+            else
+                fprintf(f, " ");
+        }
+    }
+    fprintf(f,"%d:\n", NoOfDrinks);
+    for(int i=0; i<NoOfDrinks; i++)
+    {
+        fprintf(f,"(%s - %.0lf)",Drinks[i],PriceDrinks[i]);
+        if(i != NoOfDrinks - 1)
+            fprintf(f,", ");
+    }
+    fclose(f);
     printf("The food data is:\n");
     for(int i=0; i<NoOfFoodTypes; i++)
     {
@@ -120,6 +142,6 @@ void getSpecificName(char *save)
         save[i++] = c;
         c = getchar();
     }
-   save[i] = '\0';
+   save[--i] = '\0';
 
 }
