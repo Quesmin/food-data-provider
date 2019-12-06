@@ -72,7 +72,7 @@ int main() {
     fprintf(f,"%d:\n", NoOfFoodTypes);
     for(int i=0; i<NoOfFoodTypes; i++)
     {
-        fprintf(f,"%s: ", FoodTypes[i]);
+        fprintf(f,"%s %d: ", FoodTypes[i], NoOfSpecificFood[i]);
         for(int j=0; j<NoOfSpecificFood[i]; j++) {
             fprintf(f, "(%s - %.2lf)", SpecificFood[i][j], PriceFood[i][j]);
             if (j == NoOfSpecificFood[i] - 1)
