@@ -5,6 +5,10 @@
 #define MAX_SPECIFIC_FOOD_NAME 20
 #define MAX_LINE 40
 #define MAX_DRINK_NAME 20
+
+void getSpecificName(char *save);
+
+
 int main() {
 
     int NoOfFoodTypes;
@@ -37,9 +41,10 @@ int main() {
         for(int j=0; j<NoOfSpecificFood[i]; j++)
         {
             SpecificFood[i][j] = (char *)malloc(MAX_SPECIFIC_FOOD_NAME * sizeof(char));
+            getSpecificName(SpecificFood[i][j]);
             char line[MAX_LINE];
             gets(line);
-            sscanf(line, "%s (%lf)", SpecificFood[i][j], &PriceFood[i][j]);
+            sscanf(line, "%lf)", &PriceFood[i][j]);
         }
     }
 
@@ -56,11 +61,34 @@ int main() {
     for(int i=0; i<NoOfDrinks; i++)
     {
         Drinks[i] = (char *)malloc(MAX_DRINK_NAME * sizeof(char));
+        getSpecificName(Drinks[i]);
         char line[MAX_LINE];
         gets(line);
-        sscanf(line, "%s (%lf)", Drinks[i], &PriceDrinks[i]);
+        sscanf(line, "%lf)", &PriceDrinks[i]);
     }
 
+    FILE *f;
+    f = fopen("C:\\Users\\Cosmin\\Desktop\\CP\\food-ordering\\data.txt", "w");
+    fprintf(f,"%d:\n", NoOfFoodTypes);
+    for(int i=0; i<NoOfFoodTypes; i++)
+    {
+        fprintf(f,"%s %d: ", FoodTypes[i], NoOfSpecificFood[i]);
+        for(int j=0; j<NoOfSpecificFood[i]; j++) {
+            fprintf(f, "(%s - %.2lf)", SpecificFood[i][j], PriceFood[i][j]);
+            if (j == NoOfSpecificFood[i] - 1)
+                fprintf(f, "\n");
+            else
+                fprintf(f, " ");
+        }
+    }
+    fprintf(f,"%d:\n", NoOfDrinks);
+    for(int i=0; i<NoOfDrinks; i++)
+    {
+        fprintf(f,"(%s - %.0lf)",Drinks[i],PriceDrinks[i]);
+        if(i != NoOfDrinks - 1)
+            fprintf(f,", ");
+    }
+    fclose(f);
     printf("The food data is:\n");
     for(int i=0; i<NoOfFoodTypes; i++)
     {
@@ -103,4 +131,17 @@ int main() {
     free(Drinks);
     free(PriceDrinks);
     return 0;
+}
+
+void getSpecificName(char *save)
+{
+    int i=0;
+    char c = getchar();
+    while(c != '(')
+    {
+        save[i++] = c;
+        c = getchar();
+    }
+   save[--i] = '\0';
+
 }
